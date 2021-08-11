@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { IButtonProps } from '../../types/ISearchBar';
 import { BaseButton } from './BaseButton';
 

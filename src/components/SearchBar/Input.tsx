@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
 import { inputState } from '../../stores/inputState';
 import { IInputProps } from '../../types/ISearchBar';
 

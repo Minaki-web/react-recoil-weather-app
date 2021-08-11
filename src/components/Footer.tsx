@@ -1,5 +1,6 @@
 import { SiReact, SiTypescript, SiStyledComponents } from 'react-icons/si';
 import styled from 'styled-components';
+
 import RecoilSvg from '../assets/img/RecoilSvg';
 
 const Footer = () => {
