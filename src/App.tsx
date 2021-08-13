@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Main from './components/Main';
+import Header from './components/Layout/Header';
+import Footer from './components/Layout/Footer';
+import Main from './components/Layout/Main';
 
 const App = () => {
   return (

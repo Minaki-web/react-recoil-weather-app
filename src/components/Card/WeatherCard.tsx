@@ -3,6 +3,7 @@ import { RiWindyLine, RiLoginCircleLine, RiTempHotLine, RiDropLine } from 'react
 import styled from 'styled-components';
 
 import { IWeatherDataProps } from '../../types/IWeatherData';
+
 import WeatherIcon from './WeatherIcon';
 
 const WeatherCard = memo((props: IWeatherDataProps) => {

@@ -2,11 +2,12 @@ import Loader from 'react-loader-spinner';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { errorMessage } from '../stores/errorMessage';
-import { loadingState } from '../stores/loading';
-import { undefinedState } from '../stores/undefined';
-import { weatherState } from '../stores/weather';
-import WeatherCard from './Card/WeatherCard';
+import { errorMessage } from '../../stores/errorMessage';
+import { loadingState } from '../../stores/loading';
+import { undefinedState } from '../../stores/undefined';
+import { weatherState } from '../../stores/weather';
+
+import WeatherCard from '../Card/WeatherCard';
 
 const Main = () => {
   const fetchData = useRecoilValue(weatherState);
