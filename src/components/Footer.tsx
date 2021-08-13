@@ -22,7 +22,7 @@ const Footer = () => {
 };
 
 const SFooter = styled.footer`
-  background-color: #b9b9b9;
+  background-color: #dbdbdb;
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -38,7 +38,7 @@ const SFooter = styled.footer`
   }
 
   .copyright {
-    margin-top: 1em;
+    margin-top: 2em;
     text-align: center;
 
     small {

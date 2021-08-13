@@ -84,12 +84,13 @@ const SWeatherDesc = styled.div`
 
     & > .meta {
       display: flex;
-      gap: 0.25em;
+      gap: 0.5em;
       align-items: center;
       margin-bottom: 0.5em;
 
       & svg {
         vertical-align: bottom;
+        margin-right: 0.25em;
       }
     }
 

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Mainvisual from '../assets/img/mainvisual.jpg';
 import { errorMessage } from '../stores/errorMessage';
 import { inputState } from '../stores/inputState';
+import { loadingState } from '../stores/loading';
 import { undefinedState } from '../stores/undefined';
 import { weatherState } from '../stores/weather';
 import { weatherInfo } from '../types/weatherInfo';
@@ -14,10 +15,10 @@ import SearchBar from './SearchBar/SearchBar';
 const Header = () => {
   const API_KEY = process.env.REACT_APP_API_KEY!;
 
+  const inputValue = useRecoilValue(inputState);
   const setErrorMessage = useSetRecoilState(errorMessage);
   const setIsUndefined = useSetRecoilState(undefinedState);
-
-  const inputValue = useRecoilValue(inputState);
+  const setIsLoading = useSetRecoilState(loadingState);
   const setFetchData = useSetRecoilState(weatherState);
   const resetFetchData = useResetRecoilState(weatherState);
 
@@ -27,20 +28,32 @@ const Header = () => {
       setErrorMessage('検索欄が空だよ！: 404 Not Found');
       return false;
     } else {
-      axios
-        .get<weatherInfo>(`https://api.openweathermap.org/data/2.5/forecast?q=${inputValue}&units=metric&lang=ja&appid=${API_KEY}`)
-        .then((res) => {
-          const getApiData = res.data;
-          if (getApiData.cod) setIsUndefined(false);
-          setFetchData(getApiData);
-        })
-        .catch((e) => {
-          console.log(e);
-          resetFetchData();
-          setIsUndefined(true);
-          setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
-          return false;
-        });
+      setIsLoading(true);
+
+      setTimeout(() => {
+        axios
+          .get<weatherInfo>(`https://api.openweathermap.org/data/2.5/forecast`, {
+            params: {
+              q: inputValue,
+              units: 'metric',
+              lang: 'ja',
+              appid: API_KEY,
+            },
+          })
+          .then((res) => {
+            const getApiData = res.data;
+            if (getApiData.cod) setIsUndefined(false);
+            setFetchData(getApiData);
+          })
+          .catch((e) => {
+            console.log(e);
+            resetFetchData();
+            setIsUndefined(true);
+            setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
+            return false;
+          })
+          .finally(() => setIsLoading(false));
+      }, 1000);
     }
   };
 
@@ -54,25 +67,38 @@ const Header = () => {
   };
 
   const getWeatherByCoords = (lat: number, lon: number) => {
-    axios
-      .get<weatherInfo>(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=ja&appid=${API_KEY}`)
-      .then((res) => {
-        setIsUndefined(false);
-        const getApiData = res.data;
-        setFetchData(getApiData);
-      })
-      .catch((e) => {
-        console.error(e);
-        resetFetchData();
-        setIsUndefined(true);
-        setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
-        return false;
-      });
+    setIsLoading(true);
+
+    setTimeout(() => {
+      axios
+        .get<weatherInfo>(`https://api.openweathermap.org/data/2.5/forecast`, {
+          params: {
+            lat: lat,
+            lon: lon,
+            units: 'metric',
+            lang: 'ja',
+            appid: API_KEY,
+          },
+        })
+        .then((res) => {
+          setIsUndefined(false);
+          const getApiData = res.data;
+          setFetchData(getApiData);
+        })
+        .catch((e) => {
+          console.error(e);
+          resetFetchData();
+          setIsUndefined(true);
+          setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
+          return false;
+        })
+        .finally(() => setIsLoading(false));
+    }, 1000);
   };
 
   return (
     <SHeader>
-      <h1>5 Day / 3 Hour Forecast of Cities</h1>
+      <h1>3 Hours Weather Forecast</h1>
       <img src={Mainvisual} alt="" />
       <div className="header__contents">
         <SearchBar onClick1={fetchApi} onClick2={getLocation} />
