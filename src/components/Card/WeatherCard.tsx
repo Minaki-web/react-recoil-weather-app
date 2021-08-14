@@ -20,7 +20,7 @@ const WeatherCard = memo((props: IWeatherDataProps) => {
           <div className="meta">
             <p>
               <RiTempHotLine />
-              {props.main.temp} &deg;
+              {Math.round(props.main.temp)} &deg;
             </p>
             <span>/</span>
             <p>
