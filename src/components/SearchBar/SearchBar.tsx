@@ -95,11 +95,16 @@ const SearchBar = () => {
       }, 1000);
     };
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      _logic(lat, lon);
-    });
+    if (!navigator.geolocation) {
+      setErrorMessage('お使いのブラウザでは位置情報を取得するための機能がサポートされていません！');
+      return false;
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        _logic(lat, lon);
+      });
+    }
   };
 
   return (
