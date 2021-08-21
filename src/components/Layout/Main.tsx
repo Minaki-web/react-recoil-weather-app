@@ -25,8 +25,8 @@ const Main = () => {
         <p className="error-message">{ErrorMessage}</p>
       ) : (
         <>
-          <h2>{`${fetchData.city.country}, ${fetchData.city.name}`}</h2>
           <SWeatherList>
+            <h2>{`${fetchData.city.country}, ${fetchData.city.name}`}</h2>
             {fetchData.list.map((piece) => (
               <WeatherCard key={piece.dt} {...piece} />
             ))}
@@ -44,13 +44,6 @@ const SMain = styled.main`
   margin-bottom: 40px;
   padding: 0 15px;
   min-height: 53px;
-
-  & > h2 {
-    font-size: clamp(24px, 3vw, 32px);
-    margin-bottom: 0.5em;
-    text-align: center;
-    font-weight: 750;
-  }
 
   & > .error-message {
     text-align: center;
@@ -70,6 +63,26 @@ const SLoader = styled.div`
 
 const SWeatherList = styled.ul`
   border-bottom: 1px solid #979797;
+  transition: all 0.3s;
+  animation: fadeIn-up 1s ease forwards;
+
+  & > h2 {
+    font-size: clamp(24px, 3vw, 32px);
+    margin-bottom: 0.5em;
+    text-align: center;
+    font-weight: 750;
+  }
+
+  @keyframes fadeIn-up {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(none);
+    }
+  }
 `;
 
 export default Main;
