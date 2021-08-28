@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
-import { weatherInfo } from '../types/weatherInfo';
+import { baseWeatherType } from '../types/baseWeatherType';
 
-export const weatherState = atom<weatherInfo>({
+export const weatherState = atom<baseWeatherType>({
   key: 'weatherState',
   default: {
     cod: 0,
@@ -19,7 +19,6 @@ export const weatherState = atom<weatherInfo>({
           temp_max: 0,
           pressure: 0,
           humidity: 0,
-          temp_kf: 0,
         },
         weather: [
           {

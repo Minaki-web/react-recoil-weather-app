@@ -19,6 +19,13 @@ const GlobalComponents = styled.div`
   font-weight: 500;
   font-size: 16px;
   color: #494949;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  & > main {
+    flex: 1;
+  }
 `;
 
 export default App;

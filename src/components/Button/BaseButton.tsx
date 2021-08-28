@@ -7,7 +7,7 @@ export const BaseButton = styled.button`
   outline: 0;
   border-radius: 100px;
 
-  @media (max-width: 560px) {
+  @media (max-width: 630px) {
     width: 100%;
     text-align: center;
   }

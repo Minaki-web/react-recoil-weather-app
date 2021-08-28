@@ -76,7 +76,7 @@ const SWeatherList = styled.ul`
   @keyframes fadeIn-up {
     from {
       opacity: 0;
-      transform: translateY(100px);
+      transform: translateY(50px);
     }
     to {
       opacity: 1;

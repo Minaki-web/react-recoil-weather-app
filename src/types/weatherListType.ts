@@ -1,4 +1,4 @@
-export interface IWeatherDataProps {
+export type weatherListType = {
   dt: number;
   dt_txt: string;
   main: {
@@ -7,7 +7,6 @@ export interface IWeatherDataProps {
     temp_max: number;
     pressure: number;
     humidity: number;
-    temp_kf: number;
   };
   weather: [
     {
@@ -21,4 +20,4 @@ export interface IWeatherDataProps {
     speed: number;
     deg: number;
   };
-}
+};

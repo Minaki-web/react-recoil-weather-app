@@ -1,4 +1,4 @@
-export type weatherInfo = {
+export type baseWeatherType = {
   cod: number;
   city: {
     country: string;
@@ -14,7 +14,6 @@ export type weatherInfo = {
         temp_max: number;
         pressure: number;
         humidity: number;
-        temp_kf: number;
       };
       weather: [
         {

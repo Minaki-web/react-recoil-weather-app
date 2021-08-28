@@ -6,7 +6,7 @@ import SearchBar from '../SearchBar/SearchBar';
 const Header = () => {
   return (
     <SHeader>
-      <h1>3 Hours Weather Forecast</h1>
+      <h1>5 Day / 3 Hour Forecast</h1>
       <img src={Mainvisual} alt="" />
       <div className="header__contents">
         <SearchBar />
@@ -44,7 +44,7 @@ const SHeader = styled.header`
     left: 0;
     right: 0;
     z-index: 1;
-    font-size: clamp(32px, 3vw, 40px);
+    font-size: clamp(28px, 3vw, 40px);
     text-align: center;
     font-weight: 750;
     padding: 1em 15px;

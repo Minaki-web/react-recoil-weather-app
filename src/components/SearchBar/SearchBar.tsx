@@ -9,7 +9,7 @@ import { cityNameQuery } from '../../stores/cityName';
 import { undefinedState } from '../../stores/undefined';
 import { weatherState } from '../../stores/weather';
 
-import { weatherInfo } from '../../types/weatherInfo';
+import { baseWeatherType } from '../../types/baseWeatherType';
 
 import { BaseButton } from '../Button/BaseButton';
 
@@ -34,30 +34,28 @@ const SearchBar = () => {
       } else {
         setIsLoading(true);
 
-        setTimeout(async () => {
-          await axios
-            .get<weatherInfo>(`https://api.openweathermap.org/data/2.5/forecast`, {
-              params: {
-                q: cityName,
-                units: 'metric',
-                lang: 'ja',
-                appid: API_KEY,
-              },
-            })
-            .then((res) => {
-              const getApiData = res.data;
-              if (getApiData.cod) setIsUndefined(false);
-              setFetchData(getApiData);
-            })
-            .catch((e) => {
-              console.log(e);
-              resetFetchData();
-              setIsUndefined(true);
-              setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
-              return false;
-            })
-            .finally(() => setIsLoading(false));
-        }, 1000);
+        await axios
+          .get<baseWeatherType>(`https://api.openweathermap.org/data/2.5/forecast`, {
+            params: {
+              q: cityName,
+              units: 'metric',
+              lang: 'ja',
+              appid: API_KEY,
+            },
+          })
+          .then((res) => {
+            const getApiData = res.data;
+            if (getApiData.cod) setIsUndefined(false);
+            setFetchData(getApiData);
+          })
+          .catch((e) => {
+            console.log(e);
+            resetFetchData();
+            setIsUndefined(true);
+            setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
+            return false;
+          })
+          .finally(() => setIsLoading(false));
       }
     };
 
@@ -68,31 +66,29 @@ const SearchBar = () => {
     const _logic = (lat: number, lon: number) => {
       setIsLoading(true);
 
-      setTimeout(() => {
-        axios
-          .get<weatherInfo>(`https://api.openweathermap.org/data/2.5/forecast`, {
-            params: {
-              lat: lat,
-              lon: lon,
-              units: 'metric',
-              lang: 'ja',
-              appid: API_KEY,
-            },
-          })
-          .then((res) => {
-            setIsUndefined(false);
-            const getApiData = res.data;
-            setFetchData(getApiData);
-          })
-          .catch((e) => {
-            console.error(e);
-            resetFetchData();
-            setIsUndefined(true);
-            setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
-            return false;
-          })
-          .finally(() => setIsLoading(false));
-      }, 1000);
+      axios
+        .get<baseWeatherType>(`https://api.openweathermap.org/data/2.5/forecast`, {
+          params: {
+            lat: lat,
+            lon: lon,
+            units: 'metric',
+            lang: 'ja',
+            appid: API_KEY,
+          },
+        })
+        .then((res) => {
+          setIsUndefined(false);
+          const getApiData = res.data;
+          setFetchData(getApiData);
+        })
+        .catch((e) => {
+          console.error(e);
+          resetFetchData();
+          setIsUndefined(true);
+          setErrorMessage('検索上限に達したか、もしくはお探しの都市の情報がなかったよ');
+          return false;
+        })
+        .finally(() => setIsLoading(false));
     };
 
     if (!navigator.geolocation) {
@@ -136,7 +132,8 @@ const SForm = styled.form`
   justify-content: center;
   gap: 0.5em;
 
-  @media (max-width: 560px) {
+  @media (max-width: 630px) {
+    width: 100%;
     flex-wrap: wrap;
   }
 `;

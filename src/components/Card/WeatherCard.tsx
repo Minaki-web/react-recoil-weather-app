@@ -2,11 +2,15 @@ import { memo } from 'react';
 import { RiWindyLine, RiLoginCircleLine, RiTempHotLine, RiDropLine } from 'react-icons/ri';
 import styled from 'styled-components';
 
-import { IWeatherDataProps } from '../../types/IWeatherData';
+import { weatherListType } from '../../types/weatherListType';
 
 import WeatherIcon from './WeatherIcon';
 
-const WeatherCard = memo((props: IWeatherDataProps) => {
+const WeatherCard = memo((props: weatherListType) => {
+  const round = (num: number) => {
+    return Math.round(num);
+  };
+
   return (
     <SCard>
       <SWeatherIcon>
@@ -20,23 +24,26 @@ const WeatherCard = memo((props: IWeatherDataProps) => {
           <div className="meta">
             <p>
               <RiTempHotLine />
-              {Math.round(props.main.temp)} &deg;
+              {round(props.main.temp)}&deg;
             </p>
-            <span>/</span>
             <p>
-              <RiDropLine />
-              {props.main.humidity} &#37;
+              (Min: {round(props.main.temp_min)}&deg; / Max: {round(props.main.temp_max)}&deg;)
             </p>
           </div>
           <div className="meta">
             <p>
+              <RiDropLine />
+              {props.main.humidity}&#37;
+            </p>
+            <span>/</span>
+            <p>
               <RiWindyLine />
-              {props.wind.speed} m/s
+              {props.wind.speed}m/s
             </p>
             <span>/</span>
             <p>
               <RiLoginCircleLine />
-              {props.main.pressure} hPa
+              {props.main.pressure}hPa
             </p>
           </div>
           <p className="timestamp">{props.dt_txt}</p>
@@ -90,7 +97,7 @@ const SWeatherDesc = styled.div`
       margin-bottom: 0.5em;
 
       & svg {
-        vertical-align: bottom;
+        vertical-align: middle;
         margin-right: 0.25em;
       }
     }
