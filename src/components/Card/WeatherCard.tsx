@@ -18,9 +18,7 @@ const WeatherCard = memo((props: weatherListType) => {
       </SWeatherIcon>
       <SWeatherDesc>
         <div className="inner">
-          <h3 className="meta">
-            <p>{props.weather[0].description}</p>
-          </h3>
+          <h3 className="meta">{props.weather[0].description}</h3>
           <div className="meta">
             <p>
               <RiTempHotLine />
@@ -88,13 +86,13 @@ const SWeatherDesc = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: clamp(14px, 2vw, 20px);
+    font-size: clamp(13px, 2vw, 20px);
 
     & > .meta {
       display: flex;
       gap: 0.5em;
       align-items: center;
-      margin-bottom: 0.5em;
+      margin-bottom: 15px;
 
       & svg {
         vertical-align: middle;
@@ -113,7 +111,6 @@ const SWeatherDesc = styled.div`
     font-size: clamp(12px, 2vw, 15px);
     text-align: center;
     border-top: 1px solid;
-    margin-top: var(--baseBlank);
     padding-top: var(--baseBlank);
   }
 `;
