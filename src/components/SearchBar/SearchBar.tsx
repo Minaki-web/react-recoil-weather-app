@@ -40,8 +40,8 @@ const SearchBar = () => {
               q: cityName,
               units: 'metric',
               lang: 'ja',
-              appid: API_KEY,
-            },
+              appid: API_KEY
+            }
           })
           .then((res) => {
             const getApiData = res.data;
@@ -73,8 +73,8 @@ const SearchBar = () => {
             lon: lon,
             units: 'metric',
             lang: 'ja',
-            appid: API_KEY,
-          },
+            appid: API_KEY
+          }
         })
         .then((res) => {
           setIsUndefined(false);
@@ -110,7 +110,12 @@ const SearchBar = () => {
         setLocationQuery(textValue);
       }}
     >
-      <SInput type="text" placeholder="ローマ字で都市名を入力してね" value={textValue} onChange={(e) => setTextValue(e.target.value)} />
+      <SInput
+        type="text"
+        placeholder="ローマ字で都市名を入力してね"
+        value={textValue}
+        onChange={(e) => setTextValue(e.target.value)}
+      />
       <PrimaryButton
         type="submit"
         onClick={(e) => {
