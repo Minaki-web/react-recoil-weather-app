@@ -1,4 +1,12 @@
-import { RiCloudyLine, RiSunLine, RiThunderstormsLine, RiDrizzleLine, RiRainyLine, RiSnowyLine, RiMistLine } from 'react-icons/ri';
+import {
+  RiCloudyLine,
+  RiSunLine,
+  RiThunderstormsLine,
+  RiDrizzleLine,
+  RiRainyLine,
+  RiSnowyLine,
+  RiMistLine
+} from 'react-icons/ri';
 
 interface IWeatherIconProps {
   icon: string;
